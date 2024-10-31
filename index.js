@@ -54,7 +54,7 @@ const createBook = (req, res, next) => {
 books.push(newBook);
 globalId++;
 
-  return res.json(newBook);
+  return res.json(newBookcu);
 }
 
 const deleteBook = (req, res, next) => {
