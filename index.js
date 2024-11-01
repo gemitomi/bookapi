@@ -66,15 +66,42 @@ const deleteBook = (req, res, next) => {
 }
 
 const updateBook = (req, res, next) => {
-  return next();
+  if (typeof req.body.title !== 'undefined'){
+    books[res.locals.bookId].title = req.body.title;
+  } 
+  if (typeof req.body.author !== 'undefined') {
+     books[res.locals.bookId].author = req.body.author;
+  }
+  return res.json(books[res.locals.bookId]);
+  
+  /*return res.status(400).json({error: 'Missing title or author!'});*/
+ 
+  
 }
 
 const search = (req, res, next) => {
+  if (typeof req.body.search == 'undefined') {
+    return res.status(400).json({error: 'Missing search!'});
+  } 
+
+  const s = req.body.search;
+  return res.json(books.filter(e => e.author.includes(s) || e.title.includes(s)));
+}
+
+const auth = (req, res, next) => {
+  if (typeof req.query.auth === 'undefined') {
+    return res.status(400).json({error: 'Missing auth!'});
+  } 
+
+  if (req.query.auth !== 'belaba'){
+    return res.status(401).json({error: 'Wrong  auth!'});
+  }
   return next();
 }
 
+app.use(auth);
 app.get('/book', getBooks);
-app.get('/book/:id', getBookIndex);
+app.get('/book/:id', getBookIndex, (req, res, next) => res.json(books[res.locals.bookId]));
 app.put('/book', createBook);
 app.delete('/book/:id', getBookIndex, deleteBook);
 app.patch('/book/:id', getBookIndex, updateBook);
