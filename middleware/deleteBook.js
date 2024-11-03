@@ -5,7 +5,8 @@ export default (objRep) => {
     bookModel.remove(deletedBook);
     db.saveDatabase(err => {
       //err
-      return res.json(deletedBook);
+      res.locals.book = deletedBook;
+      return next();
     })
     
   }

@@ -1,8 +1,9 @@
 export default (objRep) => {
   const {bookModel} = objRep;
   return (req, res, next) => {
-    const allBooks = bookModel.find();
-    return res.json(allBooks);
+    res.locals.books = bookModel.find();
+    return next();
+    //return res.json(res.locals.books);
   }
 }
 

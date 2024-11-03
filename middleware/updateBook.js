@@ -11,7 +11,8 @@ export default (objRep) => {
     bookModel.update(res.locals.book);
     db.saveDatabase(err => {
       //err
-      return res.json(res.locals.book);
+      return next();
+      //return res.json(res.locals.book);
     });
     
     

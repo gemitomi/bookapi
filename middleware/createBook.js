@@ -12,7 +12,8 @@ export default (objRep) => {
     bookModel.insert(newBook);
     return db.saveDatabase((err) => {
       //err
-      return res.json(newBook);
+      return next();
+      //return res.json(newBook);
     })
     
     

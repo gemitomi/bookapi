@@ -10,12 +10,23 @@ const app = express();
 /* app.use(bodyParser.json())*/
 app.use(express.json());
 
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded());
+
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 initDatabase((err, {db, bookModel} ) => {
   if (err) {
     return console.error(err);
   }
+  /*app.use((req, res, next) => {
+    res.render("index", {
+      alma:'korte'
+    });
+  });*/
   addRoutes(app, db, bookModel);
+
   app.listen(3000, function () {
     console.log('Running on: 3000');
   });
