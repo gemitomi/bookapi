@@ -1,0 +1,26 @@
+Routing:
+GET /                 lista oldal
+GET /newbook          üres hozzáadás form
+POST /newbook         mentés
+GET /editbook/:id     módositás form (előre kitöltve)
+POST /editbook/:id    mentést (módosítás)
+GET /deletebook/:id   törlés
+
+
+- lista oldal (kezdő oldal)
+  -kereső mező
+  -táblázat
+    -utolsó oszlop: módosítás és törlés
+  -button: new book
+- hozzáadás oldal
+  -form
+    -title, author
+    -button: mégsem -> listaoldalra nav
+- modositás
+  -form
+    -title, author
+    -button: mégsem -> listaoldalra nav
+- törlés (nincs scrreen)
+  -törlés után -> listaoldalra nav
+- keresés
+  -lista oldal teteje
